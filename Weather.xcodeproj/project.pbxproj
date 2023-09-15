@@ -25,6 +25,12 @@
 		FADB280C2AB3C63E00CBA6D1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADB280B2AB3C63E00CBA6D1 /* CoreLocation.framework */; };
 		FADB280E2AB3C64400CBA6D1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADB280D2AB3C64400CBA6D1 /* MapKit.framework */; };
 		FADB28112AB3F8A300CBA6D1 /* WeatherListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB28102AB3F8A300CBA6D1 /* WeatherListViewModel.swift */; };
+		FADB28132AB42ADE00CBA6D1 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB28122AB42ADE00CBA6D1 /* APIClient.swift */; };
+		FADB28172AB42DD600CBA6D1 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB28162AB42DD600CBA6D1 /* Errors.swift */; };
+		FADB28192AB431BD00CBA6D1 /* CLPlacemark+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB28182AB431BD00CBA6D1 /* CLPlacemark+String.swift */; };
+		FADB281B2AB43A0500CBA6D1 /* Double+Temperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADB281A2AB43A0500CBA6D1 /* Double+Temperature.swift */; };
+		FADB281E2AB44E8E00CBA6D1 /* AsyncLocationKit in Frameworks */ = {isa = PBXBuildFile; productRef = FADB281D2AB44E8E00CBA6D1 /* AsyncLocationKit */; };
+		FADB28212AB45FEA00CBA6D1 /* CachedImage in Frameworks */ = {isa = PBXBuildFile; productRef = FADB28202AB45FEA00CBA6D1 /* CachedImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +73,10 @@
 		FADB280B2AB3C63E00CBA6D1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		FADB280D2AB3C64400CBA6D1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		FADB28102AB3F8A300CBA6D1 /* WeatherListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherListViewModel.swift; sourceTree = "<group>"; };
+		FADB28122AB42ADE00CBA6D1 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		FADB28162AB42DD600CBA6D1 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		FADB28182AB431BD00CBA6D1 /* CLPlacemark+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLPlacemark+String.swift"; sourceTree = "<group>"; };
+		FADB281A2AB43A0500CBA6D1 /* Double+Temperature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Temperature.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +86,8 @@
 			files = (
 				FADB280E2AB3C64400CBA6D1 /* MapKit.framework in Frameworks */,
 				FADB280C2AB3C63E00CBA6D1 /* CoreLocation.framework in Frameworks */,
+				FADB28212AB45FEA00CBA6D1 /* CachedImage in Frameworks */,
+				FADB281E2AB44E8E00CBA6D1 /* AsyncLocationKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,9 +179,9 @@
 		FACC96892AB3AAC200B65786 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				FADB28032AB3BD8600CBA6D1 /* NetworkClient.swift */,
+				FADB28122AB42ADE00CBA6D1 /* APIClient.swift */,
 				FADB28082AB3C60100CBA6D1 /* LocationManager.swift */,
-				FACC968E2AB3B5AF00B65786 /* Models */,
+				FADB28142AB42BC100CBA6D1 /* Network */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -205,7 +217,10 @@
 		FADB28052AB3C3EC00CBA6D1 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				FADB28162AB42DD600CBA6D1 /* Errors.swift */,
 				FADB28062AB3C40D00CBA6D1 /* URLSession+Request.swift */,
+				FADB28182AB431BD00CBA6D1 /* CLPlacemark+String.swift */,
+				FADB281A2AB43A0500CBA6D1 /* Double+Temperature.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -228,6 +243,15 @@
 			path = WeatherList;
 			sourceTree = "<group>";
 		};
+		FADB28142AB42BC100CBA6D1 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				FADB28032AB3BD8600CBA6D1 /* NetworkClient.swift */,
+				FACC968E2AB3B5AF00B65786 /* Models */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -244,6 +268,10 @@
 			dependencies = (
 			);
 			name = Weather;
+			packageProductDependencies = (
+				FADB281D2AB44E8E00CBA6D1 /* AsyncLocationKit */,
+				FADB28202AB45FEA00CBA6D1 /* CachedImage */,
+			);
 			productName = Weather;
 			productReference = FA83F59A2AB24EA600F6D3AC /* Weather.app */;
 			productType = "com.apple.product-type.application";
@@ -316,6 +344,10 @@
 				Base,
 			);
 			mainGroup = FA83F5912AB24EA600F6D3AC;
+			packageReferences = (
+				FADB281C2AB44E8E00CBA6D1 /* XCRemoteSwiftPackageReference "AsyncLocationKit" */,
+				FADB281F2AB45FEA00CBA6D1 /* XCRemoteSwiftPackageReference "CachedImage" */,
+			);
 			productRefGroup = FA83F59B2AB24EA600F6D3AC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -360,11 +392,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA83F5AA2AB24EA700F6D3AC /* Weather.xcdatamodeld in Sources */,
+				FADB281B2AB43A0500CBA6D1 /* Double+Temperature.swift in Sources */,
 				FADB28042AB3BD8600CBA6D1 /* NetworkClient.swift in Sources */,
 				FACC96902AB3B5BE00B65786 /* Weather25.swift in Sources */,
 				FA83F5A72AB24EA700F6D3AC /* Persistence.swift in Sources */,
+				FADB28172AB42DD600CBA6D1 /* Errors.swift in Sources */,
 				FA83F5A02AB24EA600F6D3AC /* WeatherListTableViewController.swift in Sources */,
+				FADB28132AB42ADE00CBA6D1 /* APIClient.swift in Sources */,
 				FA83F59E2AB24EA600F6D3AC /* WeatherApp.swift in Sources */,
+				FADB28192AB431BD00CBA6D1 /* CLPlacemark+String.swift in Sources */,
 				FADB28072AB3C40D00CBA6D1 /* URLSession+Request.swift in Sources */,
 				FACC968D2AB3AF9400B65786 /* CityWeather.swift in Sources */,
 				FADB28092AB3C60100CBA6D1 /* LocationManager.swift in Sources */,
@@ -535,6 +571,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Your location is used in order to get the weather conditions near you.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is used in order to get the weather conditions near you.";
 				INFOPLIST_KEY_UILaunchStoryboardName = AppLaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -569,6 +607,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Your location is used in order to get the weather conditions near you.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is used in order to get the weather conditions near you.";
 				INFOPLIST_KEY_UILaunchStoryboardName = AppLaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -700,6 +740,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FADB281C2AB44E8E00CBA6D1 /* XCRemoteSwiftPackageReference "AsyncLocationKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AsyncSwift/AsyncLocationKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		FADB281F2AB45FEA00CBA6D1 /* XCRemoteSwiftPackageReference "CachedImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/leoz/CachedImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FADB281D2AB44E8E00CBA6D1 /* AsyncLocationKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FADB281C2AB44E8E00CBA6D1 /* XCRemoteSwiftPackageReference "AsyncLocationKit" */;
+			productName = AsyncLocationKit;
+		};
+		FADB28202AB45FEA00CBA6D1 /* CachedImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FADB281F2AB45FEA00CBA6D1 /* XCRemoteSwiftPackageReference "CachedImage" */;
+			productName = CachedImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		FA83F5A82AB24EA700F6D3AC /* Weather.xcdatamodeld */ = {

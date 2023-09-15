@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "asynclocationkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AsyncSwift/AsyncLocationKit.git",
+      "state" : {
+        "revision" : "3a9f81e99ba3497a438d882676fb1c3ceb4f177c",
+        "version" : "1.6.4"
+      }
+    },
+    {
+      "identity" : "cachedimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/leoz/CachedImage.git",
+      "state" : {
+        "revision" : "e46d59ebff933b5e01378698e45cb455b06062f7",
+        "version" : "0.0.4"
+      }
+    }
+  ],
+  "version" : 2
+}

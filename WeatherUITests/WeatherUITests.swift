@@ -2,7 +2,7 @@
 //  WeatherUITests.swift
 //  WeatherUITests
 //
-//  Created by Alex Yuh-Rern Wang on 9/13/23.
+//  Created by Alex Wang on 9/13/23.
 //
 
 import XCTest

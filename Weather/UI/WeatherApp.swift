@@ -2,7 +2,7 @@
 //  WeatherApp.swift
 //  Weather
 //
-//  Created by Alex Yuh-Rern Wang on 9/13/23.
+//  Created by Alex Wang on 9/13/23.
 //
 
 import SwiftUI
@@ -12,7 +12,7 @@ struct WeatherApp: App {
 
     var body: some Scene {
         WindowGroup {
-            NavigationView {
+            NavigationStack {
                 WeatherListView()
                     .navigationTitle("Weather")
             }

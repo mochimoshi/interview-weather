@@ -2,7 +2,7 @@
 //  Weather25.swift
 //  Weather
 //
-//  Created by Alex Yuh-Rern Wang on 9/14/23.
+//  Created by Alex Wang on 9/14/23.
 //
 
 import Foundation
@@ -68,7 +68,7 @@ struct Weather25: Codable {
     struct Wind: Codable {
         var speed: Double
         var deg: Int
-        var gust: Double
+        var gust: Double?
     }
 
     struct Clouds: Codable {

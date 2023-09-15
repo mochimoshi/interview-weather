@@ -2,43 +2,71 @@
 //  LocationManager.swift
 //  Weather
 //
-//  Created by Alex Yuh-Rern Wang on 9/14/23.
+//  Created by Alex Wang on 9/14/23.
 //
 
 import Foundation
 import MapKit
 import CoreLocation
 
-enum LocationManagerError: Error, LocalizedError {
-    case noCoordinatesAvailableForAddress
-    
-    // These should be localized strings. For now, we'll go with regular strings.
-    var errorDescription: String? {
-        switch self {
-        case .noCoordinatesAvailableForAddress:
-            return "No coordinates found for address"
-        }
-    }
-}
+import AsyncLocationKit
 
 class LocationManager {
+    struct Placemark {
+        let name: String
+        let coordinates: CLLocationCoordinate2D
+    }
     
     static let shared = LocationManager()
     
     let geocoder = CLGeocoder()
-    
+    let asyncLocationManager = AsyncLocationManager(desiredAccuracy: .kilometerAccuracy)
+        
     private init() {
         
     }
     
     // Instead of hitting a paid API, we can geocode with Apple's APIs instead.
-    func geocode(address: String) async throws -> (Double, Double) {
+    func geocode(address: String) async throws -> Placemark {
         guard let result = try await geocoder.geocodeAddressString(address).first,
               let coordinates = result.location?.coordinate else {
             print("No results retrieved while getting coordinates for address \(address).")
             throw LocationManagerError.noCoordinatesAvailableForAddress
         }
         
-        return (coordinates.latitude, coordinates.longitude)
+        return Placemark(name: result.displayName, coordinates: coordinates)
+    }
+    
+    func coordinatesForUserLocation() async throws -> Placemark {
+        let permission = await self.asyncLocationManager.requestPermission(with: .whenInUsage)
+        
+        switch permission {
+        case .authorizedAlways, .authorizedWhenInUse:
+            let event = try await asyncLocationManager.requestLocation()
+            switch event {
+            case .didUpdateLocations(let locations):
+                guard let location = locations.first else {
+                    throw LocationManagerError.noLocationFoundForUser
+                }
+                
+                let placemark = try await geocoder.reverseGeocodeLocation(location).first
+                
+                return Placemark(
+                    name: placemark?.displayName ?? "Current Location",
+                    coordinates: location.coordinate
+                )
+            case .didFailWith(let error):
+                throw error
+            case .didPaused, .didResume, .none:
+                // These cases shouldn't happen
+                throw LocationManagerError.unexpectedError
+            }
+        case .notDetermined:
+            throw LocationManagerError.noLocationPermissions
+        case .denied, .restricted:
+            throw LocationManagerError.noLocationPermissions
+        @unknown default:
+            fatalError("New case for location permissions that is not yet implemented")
+        }
     }
 }

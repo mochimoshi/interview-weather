@@ -1,5 +1,5 @@
 //
-//  APIClient.swift
+//  NetworkClient.swift
 //  Weather
 //
 //  Created by Alex Yuh-Rern Wang on 9/14/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class APIClient {
+class NetworkClient {
     private enum OpenWeatherService {
         static let baseUrl = URL(string: "https://api.openweathermap.org/data/")!
         
@@ -27,17 +27,19 @@ class APIClient {
         }
     }
     
-    static let shared = APIClient()
+    static let shared = NetworkClient()
+    let locationManager: LocationManager
     
-    private init() {
-        
+    private init(locationManager: LocationManager = .shared) {
+        self.locationManager = locationManager
     }
     
-//    func fetchWeather(location: String) async -> Weather25? {
-//
-//    }
+    func fetchWeather(location: String) async throws -> Weather25? {
+        let coordinates = try await locationManager.geocode(address: location)
+        return try await fetchWeather(lat: coordinates.0, lon: coordinates.1)
+    }
     
-    private func fetchWeather(lat: Double, lon: Double) async -> Weather25? {
+    private func fetchWeather(lat: Double, lon: Double) async throws -> Weather25? {
         var endpointUrl = OpenWeatherService.weather25.endpoint()
         endpointUrl.append(
             queryItems: [URLQueryItem(name: "lat", value: String(lat)),
@@ -45,12 +47,6 @@ class APIClient {
                          URLQueryItem(name: "appid", value: OpenWeatherService.apiKey)]
         )
         
-        do {
-            return try await URLSession.shared.fetch(url: endpointUrl)
-        } catch let error {
-            // Can use a logging library here, but for now print an error into console
-            print("Error loading: \(error.localizedDescription)")
-            return nil
-        }
+        return try await URLSession.shared.fetch(url: endpointUrl)
     }
 }

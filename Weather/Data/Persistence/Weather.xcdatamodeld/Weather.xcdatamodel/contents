@@ -2,8 +2,10 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22G91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CityWeather" representedClassName=".CityWeather" syncable="YES" codeGenerationType="category">
         <attribute name="displayName" attributeType="String"/>
-        <attribute name="id" attributeType="String"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="lastUpdated" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="lat" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="long" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="weatherData" optional="YES" attributeType="Binary"/>
     </entity>
 </model>
